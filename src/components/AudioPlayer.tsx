@@ -36,14 +36,11 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioEngine, audioRef,
   }
 
   const handleTogglePlay = async () => {
+    // Mic mode and file mode are mutually exclusive — do nothing if mic is active
+    if (audio.isMicActive) return
+
     const audioEl = audioRef.current
     if (!audioEl) return
-
-    // 文件播放模式：自动关闭麦克风
-    if (audio.isMicActive) {
-      audioEngine.disableMic()
-      setAudio({ isMicActive: false })
-    }
 
     if (!engineInitRef.current) {
       await audioEngine.init(audioEl)
@@ -259,7 +256,12 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioEngine, audioRef,
       {/* 播放/暂停 */}
       <button
         onClick={handleTogglePlay}
-        className="p-3 bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-700 hover:to-blue-700 rounded-full transition-all duration-200 text-white shadow-lg shadow-violet-500/25"
+        disabled={audio.isMicActive}
+        className={`p-3 rounded-full transition-all duration-200 ${
+          audio.isMicActive
+            ? 'bg-white/5 text-gray-600 cursor-not-allowed'
+            : 'bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-700 hover:to-blue-700 text-white shadow-lg shadow-violet-500/25'
+        }`}
         aria-label={audio.isPlaying ? t.player.pause : t.player.play}
       >
         {audio.isPlaying ? (
