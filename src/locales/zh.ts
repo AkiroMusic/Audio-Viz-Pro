@@ -94,6 +94,8 @@ const zh = {
     uploadFile: '上传音频文件',
     enableMic: '开启麦克风',
     disableMic: '关闭麦克风',
+    selectDevice: '选择输入设备',
+    defaultDevice: '默认设备',
     play: '播放',
     pause: '暂停',
     volume: '音量',

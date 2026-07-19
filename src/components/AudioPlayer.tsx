@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useCallback } from 'react'
 import { useStore } from '../store/useStore'
 import { AudioEngine } from '../audio/AudioEngine'
 import { formatTime } from '../utils'
@@ -13,13 +13,15 @@ interface AudioPlayerProps {
 }
 
 export const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioEngine, audioRef, onLoadFile, className = '', style }) => {
-  const { audio } = useStore()
+  const { audio, setAudio } = useStore()
   const { t } = useLanguage()
   const [volume, setVolume] = useState(1)
   const [isDragging, setIsDragging] = useState(false)
+  const [showDeviceSelector, setShowDeviceSelector] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const progressRef = useRef<HTMLDivElement>(null)
   const engineInitRef = useRef(false)
+  const deviceSelectorRef = useRef<HTMLDivElement>(null)
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -27,7 +29,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioEngine, audioRef,
       // 文件模式：自动关闭麦克风
       if (audio.isMicActive) {
         audioEngine.disableMic()
-        useStore.getState().setAudio({ isMicActive: false })
+        setAudio({ isMicActive: false })
       }
       onLoadFile(file)
     }
@@ -40,7 +42,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioEngine, audioRef,
     // 文件播放模式：自动关闭麦克风
     if (audio.isMicActive) {
       audioEngine.disableMic()
-      useStore.getState().setAudio({ isMicActive: false })
+      setAudio({ isMicActive: false })
     }
 
     if (!engineInitRef.current) {
@@ -108,18 +110,53 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioEngine, audioRef,
   const handleToggleMic = async () => {
     if (audio.isMicActive) {
       audioEngine.disableMic()
-      useStore.getState().setAudio({ isMicActive: false })
+      setAudio({ isMicActive: false })
+      setShowDeviceSelector(false)
     } else {
       // 麦克风模式：暂停文件播放
       const audioEl = audioRef.current
       if (audioEl && !audioEl.paused) {
         audioEl.pause()
-        useStore.getState().setAudio({ isPlaying: false })
+        setAudio({ isPlaying: false })
       }
-      await audioEngine.enableMic()
-      useStore.getState().setAudio({ isMicActive: true })
+      await audioEngine.enableMic(audio.selectedDeviceId || undefined)
+      setAudio({ isMicActive: true })
+      // Enumerate devices for the selector
+      const devices = await audioEngine.getAudioInputDevices()
+      setAudio({ audioDevices: devices })
     }
   }
+
+  const handleDeviceChange = async (deviceId: string) => {
+    setAudio({ selectedDeviceId: deviceId })
+    if (audio.isMicActive) {
+      // Restart mic with the new device
+      audioEngine.disableMic()
+      await audioEngine.enableMic(deviceId || undefined)
+      setAudio({ isMicActive: true })
+    }
+    setShowDeviceSelector(false)
+  }
+
+  const toggleDeviceSelector = useCallback(async () => {
+    if (!showDeviceSelector && audio.isMicActive) {
+      const devices = await audioEngine.getAudioInputDevices()
+      setAudio({ audioDevices: devices })
+    }
+    setShowDeviceSelector(prev => !prev)
+  }, [showDeviceSelector, audio.isMicActive, audioEngine, setAudio])
+
+  // Close device selector on outside click
+  useEffect(() => {
+    if (!showDeviceSelector) return
+    const handleClickOutside = (e: MouseEvent) => {
+      if (deviceSelectorRef.current && !deviceSelectorRef.current.contains(e.target as Node)) {
+        setShowDeviceSelector(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [showDeviceSelector])
 
   const handleFullscreen = () => {
     if (document.fullscreenElement) {
@@ -154,20 +191,70 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioEngine, audioRef,
         </svg>
       </button>
 
-      {/* 麦克风 */}
-      <button
-        onClick={handleToggleMic}
-        className={`p-2.5 rounded-xl transition-all duration-200 ${
-          audio.isMicActive 
-            ? 'bg-gradient-to-r from-violet-600 to-blue-600 text-white shadow-lg shadow-violet-500/25' 
-            : 'hover:bg-white/10 text-gray-400 hover:text-white'
-        }`}
-        aria-label={audio.isMicActive ? t.player.disableMic : t.player.enableMic}
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-        </svg>
-      </button>
+      {/* 麦克风 + 设备选择器 */}
+      <div className="relative" ref={deviceSelectorRef}>
+        <button
+          onClick={handleToggleMic}
+          className={`p-2.5 rounded-xl transition-all duration-200 ${
+            audio.isMicActive 
+              ? 'bg-gradient-to-r from-violet-600 to-blue-600 text-white shadow-lg shadow-violet-500/25' 
+              : 'hover:bg-white/10 text-gray-400 hover:text-white'
+          }`}
+          aria-label={audio.isMicActive ? t.player.disableMic : t.player.enableMic}
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+          </svg>
+        </button>
+
+        {/* 设备选择器下拉按钮 */}
+        {audio.isMicActive && audio.audioDevices.length > 1 && (
+          <button
+            onClick={toggleDeviceSelector}
+            className="absolute -right-1 top-0 translate-x-full p-1.5 hover:bg-white/10 rounded-r-xl transition-all duration-200 text-gray-500 hover:text-white"
+            aria-label={t.player.selectDevice}
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        )}
+
+        {/* 设备选择下拉面板 */}
+        {showDeviceSelector && (
+          <div className="absolute bottom-full left-0 mb-2 w-64 bg-gray-900/98 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50">
+            <div className="px-3 py-2 border-b border-white/5">
+              <span className="text-xs font-medium text-gray-400">{t.player.selectDevice}</span>
+            </div>
+            <div className="max-h-48 overflow-y-auto py-1">
+              <button
+                onClick={() => handleDeviceChange('')}
+                className={`w-full text-left px-3 py-2 text-sm transition-colors ${
+                  !audio.selectedDeviceId
+                    ? 'bg-violet-600/20 text-violet-300'
+                    : 'text-gray-300 hover:bg-white/5'
+                }`}
+              >
+                {t.player.defaultDevice}
+              </button>
+              {audio.audioDevices.map(device => (
+                <button
+                  key={device.deviceId}
+                  onClick={() => handleDeviceChange(device.deviceId)}
+                  className={`w-full text-left px-3 py-2 text-sm transition-colors truncate ${
+                    audio.selectedDeviceId === device.deviceId
+                      ? 'bg-violet-600/20 text-violet-300'
+                      : 'text-gray-300 hover:bg-white/5'
+                  }`}
+                  title={device.label || `Input ${device.deviceId.slice(0, 8)}`}
+                >
+                  {device.label || `Input ${device.deviceId.slice(0, 8)}`}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* 播放/暂停 */}
       <button

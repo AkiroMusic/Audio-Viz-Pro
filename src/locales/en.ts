@@ -88,6 +88,8 @@ const en: Translations = {
     uploadFile: 'Upload Audio File',
     enableMic: 'Enable Microphone',
     disableMic: 'Disable Microphone',
+    selectDevice: 'Select Input Device',
+    defaultDevice: 'Default Device',
     play: 'Play',
     pause: 'Pause',
     volume: 'Volume',

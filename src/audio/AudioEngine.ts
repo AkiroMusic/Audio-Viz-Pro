@@ -111,7 +111,7 @@ export class AudioEngine {
     this.mode = 'file'
   }
 
-  async enableMic(): Promise<void> {
+  async enableMic(deviceId?: string): Promise<void> {
     if (this.mode === 'mic' && this.micStream) return
 
     // Ensure AudioContext exists
@@ -140,8 +140,12 @@ export class AudioEngine {
     if (!this.analyserR) this.analyserR = this.context.createAnalyser()
     this.configureAnalysers(DEFAULT_FFT_SIZE)
 
-    // Get mic stream
-    this.micStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    // Get mic stream (with optional device selection)
+    const constraints: MediaStreamConstraints = {
+      audio: deviceId ? { deviceId: { exact: deviceId } } : true,
+      video: false,
+    }
+    this.micStream = await navigator.mediaDevices.getUserMedia(constraints)
     this.micSourceNode = this.context.createMediaStreamSource(this.micStream)
 
     // Connect mic → analysers (no destination to avoid echo)
@@ -149,6 +153,11 @@ export class AudioEngine {
     this.micSourceNode.connect(this.analyserR)
 
     this.mode = 'mic'
+  }
+
+  async getAudioInputDevices(): Promise<MediaDeviceInfo[]> {
+    const devices = await navigator.mediaDevices.enumerateDevices()
+    return devices.filter(d => d.kind === 'audioinput')
   }
 
   disableMic(): void {

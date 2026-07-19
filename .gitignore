@@ -12,6 +12,7 @@ dist
 dist-electron
 dist-ssr
 release
+Releases
 *.local
 *.tsbuildinfo
 

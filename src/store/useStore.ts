@@ -80,6 +80,7 @@ export const useStore = create<AppState>()(
       audio: {
         isPlaying: false, currentTime: 0, duration: 0,
         volume: 1.0, fileName: '', isMicActive: false,
+        audioDevices: [], selectedDeviceId: '',
       },
       setAudio: (a) => set((s) => ({ audio: { ...s.audio, ...a } })),
       

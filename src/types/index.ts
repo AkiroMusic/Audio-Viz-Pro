@@ -59,6 +59,8 @@ export interface AudioState {
   volume: number
   fileName: string
   isMicActive: boolean
+  audioDevices: MediaDeviceInfo[]
+  selectedDeviceId: string
 }
 
 // ── Render（离线渲染）配置 ──
