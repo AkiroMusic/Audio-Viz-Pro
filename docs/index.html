@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" data-pack="aurora">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audio-Viz-Pro — Audio visualization desktop app</title>
+<meta name="description" content="A powerful audio visualization desktop app — 10 visualizer effects, real-time audio analysis, deep customization, and video / GIF / screenshot export.">
+<meta property="og:title" content="Audio-Viz-Pro — Audio visualization desktop app">
+<meta property="og:description" content="A powerful audio visualization desktop app — 10 visualizer effects, real-time audio analysis, deep customization, and video / GIF / screenshot export.">
+<meta property="og:url" content="https://akiromusic.github.io/Audio-Viz-Pro/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=IBM+Plex+Mono:wght@400;600&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/palette.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="aurora-bg"></div>
+<div class="aurora-sweep"></div>
+<div class="star-field"></div>
+<div class="noise-overlay"></div>
+
+<header class="site-nav material-frosted">
+  <a class="brand" href="#"><span class="star"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.9 6.5 4.6 10.2 12 12-7.4 1.8-11.1 5.5-12 12-.9-6.5-4.6-10.2-12-12C7.4 10.2 11.1 6.5 12 0z"/></svg></span>Audio-Viz-Pro</a>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#details">Details</a>
+    <a href="https://github.com/AkiroMusic/Audio-Viz-Pro" class="nav-keep">GitHub ↗</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="hero-card panel-contrast material-film flow-nebula spring-in">
+      <div class="eyebrow"><span class="star"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.9 6.5 4.6 10.2 12 12-7.4 1.8-11.1 5.5-12 12-.9-6.5-4.6-10.2-12-12C7.4 10.2 11.1 6.5 12 0z"/></svg></span>Desktop App · Electron + React</div>
+      <h1>Audio-<span class="grad-text">Viz-Pro</span></h1>
+      <p class="tagline">A powerful audio visualization desktop app — 10 visualizer effects, real-time audio analysis, deep customization, and video / GIF / screenshot export.</p>
+      <div class="badge-row"><span class="badge">License <b>MIT</b></span><span class="badge">Framework <b>Electron · React · TypeScript</b></span><span class="badge">Rendering <b>Canvas 2D · WebGL (Three.js)</b></span><span class="badge">Effects <b>10 visualizers</b></span></div>
+      <div class="cta-row">
+          <a class="btn btn-primary" href="https://github.com/AkiroMusic/Audio-Viz-Pro/releases/latest">Download latest</a>
+          <a class="btn btn-ghost" href="https://github.com/AkiroMusic/Audio-Viz-Pro">View on GitHub</a>
+          <a class="btn btn-ghost" href="https://github.com/AkiroMusic/Audio-Viz-Pro">Source code</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="features">
+    <div class="block-head">
+      <div class="eyebrow"><span class="star"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.9 6.5 4.6 10.2 12 12-7.4 1.8-11.1 5.5-12 12-.9-6.5-4.6-10.2-12-12C7.4 10.2 11.1 6.5 12 0z"/></svg></span>Features</div>
+      <h2>What it does</h2>
+      <p class="sub">Built with React, TypeScript, and Electron, AudioViz Pro pairs local file playback and live microphone input with 10 visualizer effects — 6 Canvas 2D and 4 WebGL (Three.js) — that switch seamlessly at runtime. More than 20 adjustable parameters and a preset system with 7 built-ins cover color themes, speed, sensitivity, and FFT size, while WebM video (with audio via FFmpeg), animated GIFs, and one-click PNG screenshots make the results easy to share. The bilingual English/Chinese UI comes with global keyboard shortcuts.</p>
+    </div>
+    <div class="feature-grid">
+          <article class="feature-card material-liquid double-bezel spring-in wide" style="animation-delay:80ms"><div class="f-icon">🎙️</div><h3>Audio input</h3><p>Local file upload (drag &amp; drop or click) plus live microphone input.</p></article>
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:140ms"><div class="f-icon">🌈</div><h3>10 visualizer effects</h3><p>6 Canvas 2D and 4 WebGL (Three.js) effects, switching seamlessly at runtime — from frequency bars and aurora bands to particle storms and DNA helixes.</p></article>
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:200ms"><div class="f-icon">🎛️</div><h3>Deep customization</h3><p>20+ adjustable parameters: color themes, speed, sensitivity, FFT size, and effect settings.</p></article>
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:260ms"><div class="f-icon">💾</div><h3>Preset system</h3><p>Save, load, and delete custom presets; 7 built-in presets included.</p></article>
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:320ms"><div class="f-icon">🎬</div><h3>Video / GIF / screenshot export</h3><p>Record WebM video with audio via FFmpeg, short animated GIFs via gif.js (3/5/10 s at 10/15/20 fps), and one-click PNG screenshots.</p></article>
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:380ms"><div class="f-icon">⌨️</div><h3>Global shortcuts</h3><p>Keyboard controls for playback, visualizer switching, color themes, mirror mode, fullscreen, and capture.</p></article>
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:440ms"><div class="f-icon">🌐</div><h3>Bilingual UI</h3><p>English / Chinese language switching.</p></article>
+    </div>
+  </section>
+
+  
+
+  <section class="block" id="details">
+    <div class="block-head">
+      <div class="eyebrow"><span class="star"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.9 6.5 4.6 10.2 12 12-7.4 1.8-11.1 5.5-12 12-.9-6.5-4.6-10.2-12-12C7.4 10.2 11.1 6.5 12 0z"/></svg></span>Details</div>
+      <h2>Keyboard shortcuts</h2>
+    </div>
+    <div class="detail-card material-liquid double-bezel"><table class="detail-table"><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody><tr><td>Space</td><td>Play / Pause</td></tr><tr><td>Left / Right</td><td>Seek backward / forward 5s</td></tr><tr><td>Up / Down</td><td>Volume up / down</td></tr><tr><td>A / D</td><td>Previous / Next visualizer</td></tr><tr><td>C</td><td>Cycle color theme</td></tr><tr><td>R</td><td>Random color</td></tr><tr><td>M</td><td>Toggle mirror mode</td></tr><tr><td>F</td><td>Toggle fullscreen</td></tr><tr><td>S</td><td>Screenshot</td></tr><tr><td>Esc</td><td>Close panels</td></tr></tbody></table></div>
+  </section>
+
+  <section class="block" id="quick-start">
+    <div class="block-head">
+      <div class="eyebrow"><span class="star"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.9 6.5 4.6 10.2 12 12-7.4 1.8-11.1 5.5-12 12-.9-6.5-4.6-10.2-12-12C7.4 10.2 11.1 6.5 12 0z"/></svg></span>Quick Start</div>
+      <h2>Quick start</h2>
+    </div>
+    <div class="qs-grid">
+      <div class="qs-steps material-liquid double-bezel spring-in">
+        <ol><li><b>npm install</b> to set up dependencies.</li><li><b>npm run dev</b> for the browser dev server, or <b>npm run dev:electron</b> for Electron dev mode.</li><li>Drop in an audio file or enable the <b>microphone</b> to start visualizing.</li><li>Press <b>A</b> / <b>D</b> to switch visualizers, <b>S</b> to screenshot, <b>F</b> for fullscreen.</li></ol>
+      </div>
+      <div class="code-card panel-contrast spring-in" style="animation-delay:80ms">
+        <div class="code-title"><span class="dot"></span>shell</div>
+        <pre>npm install
+
+npm run dev           # browser dev server
+npm run dev:electron  # Electron dev mode
+
+npm run build         # production build
+npm run build:electron # Electron desktop app</pre>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <div class="hairline"></div>
+
+  <section class="block i18n-cn" id="中文" lang="zh-CN">
+    <div class="block-head">
+      <div class="eyebrow"><span class="star"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.9 6.5 4.6 10.2 12 12-7.4 1.8-11.1 5.5-12 12-.9-6.5-4.6-10.2-12-12C7.4 10.2 11.1 6.5 12 0z"/></svg></span>桌面应用 · Electron + React</div>
+      <h2>项目简介</h2>
+      <p class="sub">AudioViz Pro 基于 React、TypeScript 与 Electron 构建，将本地文件播放与麦克风实时输入接入 10 种可视化效果——6 种 Canvas 2D 与 4 种 WebGL (Three.js)——并可在运行时无缝切换。20+ 项可调参数与内置 7 个预设的预设系统覆盖颜色主题、速度、灵敏度与 FFT 大小；WebM 视频（含音频，通过 FFmpeg 编码）、动画 GIF 与一键 PNG 截图让成果便于分享。双语（英文/中文）界面配备全局键盘快捷键。</p>
+    </div>
+    <div class="feature-grid">
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:80ms"><div class="f-icon">🎙️</div><h3>音频输入</h3><p>本地文件上传（拖拽或点击）+ 麦克风实时输入。</p></article>
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:140ms"><div class="f-icon">🌈</div><h3>10 种可视化效果</h3><p>6 种 Canvas 2D 与 4 种 WebGL (Three.js) 效果，运行时无缝切换——从频率条形图、极光带到粒子风暴与 DNA 螺旋。</p></article>
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:200ms"><div class="f-icon">🎛️</div><h3>高度定制</h3><p>20+ 项可调参数：颜色主题、速度、灵敏度、FFT 大小与特效参数。</p></article>
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:260ms"><div class="f-icon">💾</div><h3>预设系统</h3><p>保存 / 加载 / 删除自定义预设，内置 7 个预设。</p></article>
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:320ms"><div class="f-icon">🎬</div><h3>视频 / GIF / 截图导出</h3><p>通过 FFmpeg 录制带音频的 WebM 视频，用 gif.js 录制短动画 GIF（3/5/10 秒、10/15/20 fps），并支持一键 PNG 截图。</p></article>
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:380ms"><div class="f-icon">⌨️</div><h3>全局快捷键</h3><p>键盘控制播放、可视化切换、颜色主题、镜像模式、全屏与截图。</p></article>
+          <article class="feature-card material-liquid double-bezel spring-in" style="animation-delay:440ms"><div class="f-icon">🌐</div><h3>双语界面</h3><p>中文 / 英文语言切换。</p></article>
+    </div>
+    <div class="block-head" style="margin-top:var(--space-8)">
+      <div class="eyebrow"><span class="star"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.9 6.5 4.6 10.2 12 12-7.4 1.8-11.1 5.5-12 12-.9-6.5-4.6-10.2-12-12C7.4 10.2 11.1 6.5 12 0z"/></svg></span>明细</div>
+      <h2>键盘快捷键</h2>
+    </div>
+    <div class="detail-card material-liquid double-bezel"><table class="detail-table"><thead><tr><th>按键</th><th>功能</th></tr></thead><tbody><tr><td>Space</td><td>播放 / 暂停</td></tr><tr><td>Left / Right</td><td>快退 / 快进 5 秒</td></tr><tr><td>Up / Down</td><td>增大 / 减小音量</td></tr><tr><td>A / D</td><td>上一个 / 下一个可视化</td></tr><tr><td>C</td><td>循环切换颜色主题</td></tr><tr><td>R</td><td>随机颜色</td></tr><tr><td>M</td><td>开关镜像模式</td></tr><tr><td>F</td><td>全屏切换</td></tr><tr><td>S</td><td>截图</td></tr><tr><td>Esc</td><td>关闭面板</td></tr></tbody></table></div>
+    <div class="qs-grid" style="margin-top:var(--space-8)">
+      <div class="qs-steps material-liquid double-bezel spring-in">
+        <ol><li><b>npm install</b> 安装依赖。</li><li><b>npm run dev</b> 启动浏览器开发服务器，或 <b>npm run dev:electron</b> 进入 Electron 开发模式。</li><li>拖入音频文件或启用<b>麦克风</b>，开始可视化。</li><li>按 <b>A</b> / <b>D</b> 切换可视化效果，<b>S</b> 截图，<b>F</b> 全屏。</li></ol>
+      </div>
+      <div class="code-card panel-contrast spring-in" style="animation-delay:80ms">
+        <div class="code-title"><span class="dot"></span>shell</div>
+        <pre>npm install
+
+npm run dev           # browser dev server
+npm run dev:electron  # Electron dev mode
+
+npm run build         # production build
+npm run build:electron # Electron desktop app</pre>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <footer class="site-footer">
+    <div class="footer-row material-liquid">
+      <div>
+        <a class="brand" href="#"><span class="star"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.9 6.5 4.6 10.2 12 12-7.4 1.8-11.1 5.5-12 12-.9-6.5-4.6-10.2-12-12C7.4 10.2 11.1 6.5 12 0z"/></svg></span>Audio-Viz-Pro</a>
+        <p class="footer-meta" style="margin-top:var(--space-3);max-width:340px">A powerful audio visualization desktop app — 10 visualizer effects, real-time audio analysis, deep customization, and video / GIF / screenshot export.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/AkiroMusic/Audio-Viz-Pro">Source code ↗</a>
+        <a href="https://github.com/AkiroMusic/Audio-Viz-Pro/releases/latest">Releases ↗</a>
+      </div>
+      <div class="footer-links">
+        <a href="https://akiromusic.com/">akiromusic.com ↗</a>
+        <a href="https://github.com/AkiroMusic">GitHub Profile ↗</a>
+        <a href="https://akiromusic.github.io/AkiroMusic/">All project sites ↗</a>
+      </div>
+    </div>
+    <p class="footer-meta">© 2026 Akiro · MIT licensed. Built with the Aurora Glass design system.</p>
+  </footer>
+
+</main>
+</body>
+</html>

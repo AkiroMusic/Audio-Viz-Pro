@@ -1,0 +1,20 @@
+/* Per-site palette overrides (extracted from app source) */
+:root {
+  --bg-base: #0A0A0F;
+  --surface-1: #14141E;
+  --surface-2: #1D1D2A;
+  --surface-contrast: #050508;
+  --border: #2A2A3C;
+  --text-primary: #E2E8F0;
+  --text-secondary: #8C93AC;
+  --text-tertiary: #585F78;
+  --accent: #7C3AED;
+  --accent-hover: #9D6BFF;
+  --accent-secondary: #38BDF8;
+  --accent-tertiary: #EC4899;
+  --grad-a: #5B21D9;
+  --grad-b: #7C3AED;
+  --grad-c: #EC4899;
+  --glass-bg: rgba(20, 20, 30, 0.62);
+  --liquid-bg: rgba(20, 20, 30, 0.60);
+}
