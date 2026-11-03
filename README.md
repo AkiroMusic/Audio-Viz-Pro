@@ -1,5 +1,6 @@
 # AudioViz Pro
 
+[![Website](https://img.shields.io/badge/site-akiromusic.github.io-6D82FF)](https://akiromusic.github.io/Audio-Viz-Pro/)
 A powerful audio visualization desktop application built with React, TypeScript, and Electron. Features 10 stunning visualizer effects, real-time audio analysis, deep customization, preset system, and video/GIF/screenshot export.
 
 ---
